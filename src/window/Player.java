@@ -22,13 +22,14 @@ public class Player extends Walker {
 
     private int lives = 3;
 
+    private boolean GameOver = false;
+
     public Player(GameWorld world) {
         super(world, characterShape);
         this.addImage(RightImage);
         coins = 0;
     }
 
-    //  credits = 0;
 
     public void walkLeft() {
         removeAllImages();
@@ -62,11 +63,9 @@ public class Player extends Walker {
     }
 
 
-//public void setCredits(int credits){this.credits = credits;}
-//public int getCredits(){return credits;}
+
     public void setCoins(int coins){
         this.coins = coins;
-       // System.out.println("Coins ="+coins);
 }
 
     public void setLives(int lives) {
@@ -78,8 +77,15 @@ public class Player extends Walker {
     }
 
     public int getCoins(){return coins;}
-    public void addCoins() {
-        setCoins(getCoins()+1);
+    public void addCoins() {setCoins(getCoins()+1);
+    }
+
+    public boolean isGameOver() {
+        return GameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        GameOver = gameOver;
     }
 }
 
