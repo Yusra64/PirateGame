@@ -4,10 +4,13 @@ import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
 public class Enemy extends Walker implements StepListener {
-    private static final Shape enemyShape = new BoxShape(2, 2f);
+    private static final Shape enemyShape = new PolygonShape(1.61f,-1.77f, 2.17f,1.15f, 0.29f,
+            1.59f, -1.02f,0.68f, -1.32f,-0.7f, -0.53f,-1.78f, 0.43f,-1.94f
+    );
 
-    BodyImage EnemyRImage = new BodyImage("images/REnemy.png", 4);
-    BodyImage EnemyLImage = new BodyImage("images/LEnemy.png", 4);
+
+    BodyImage EnemyRImage = new BodyImage("images/REnemy.png", 5);
+    BodyImage EnemyLImage = new BodyImage("images/LEnemy.png", 5);
 
     private final int speed = 4;
     private float left, right;
@@ -26,8 +29,6 @@ public class Enemy extends Walker implements StepListener {
         left = position.x- range;
         right = position.x+ range;
     }
-
-
     @Override
     public void preStep(StepEvent stepEvent) {
         if (getPosition().x > right) {
