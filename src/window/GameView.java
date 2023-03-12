@@ -8,16 +8,22 @@ import java.awt.*;
 public class GameView extends UserView {
     private Image background, heart;
     private Player player; // so to access lives from Player class
+    private GameWorld world;
 
 
     @Override
     protected void paintBackground(Graphics2D g) {
         g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
         background = new ImageIcon("images/background.jpeg").getImage();
+    }
+
+    @Override
+    public void paintComponent(Graphics g4) {
+        super.paintComponent(g4);
         if(player.getLives() == 3){
-            g.drawImage(heart, 90, 10, 40, 40, this); // had to draw each heart in a separate paint
+            g4.drawImage(heart, 90, 10, 40, 40, this); // had to draw each heart in a separate paint
         }
-        if (player.getLives() == 2) {
+        else if (player.getLives() == 2) {
             repaint(); // calls method to restart and since count is not equal to 3 anymore heart is not drawn
         }
     }
@@ -32,7 +38,7 @@ public class GameView extends UserView {
         {
             g2.drawImage(heart, 50, 10, 40, 40, this); // had to draw each heart in a separate paint
         }
-        if (player.getLives() == 1) {
+        else if (player.getLives() == 1) {
             repaint(); // calls method to restart and since count is not equal to 2 anymore heart is not drawn
         }
     }
@@ -44,8 +50,14 @@ public class GameView extends UserView {
         if(player.getLives() > 0){
             g3.drawImage(heart, 10, 10, 40, 40, this); // draws heart as long as lives is not 0
         }
-        if (player.getLives() == 0) {
+        else if (player.getLives() == 0) {
             repaint(); // calls method to restart and since count is not equal to 3 anymore heart is not drawn
+            player.destroy();
+            g3.setColor(new Color(0,0,0,150)); //black colour
+            g3.fillRect(0,0,getWidth(),getHeight());
+            Font myFont = new Font ("Helvetica", 1, 60);
+            g3.setFont (myFont);
+            g3.drawString("Game Over", 225, getHeight()/2);
         }
     }
 
@@ -61,7 +73,19 @@ public class GameView extends UserView {
     public void setPlayer(Player player) {
         this.player = player;
     }
+
+    @Override
+    public GameWorld getWorld() {
+        return world;
+    }
+
+    public void setWorld(GameWorld world) {
+        this.world = world;
+    }
+
 }
+
+
 
 
 
