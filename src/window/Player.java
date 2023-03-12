@@ -5,12 +5,15 @@ import city.cs.engine.Shape;
 import org.jbox2d.common.Vec2;
 
 public class Player extends Walker {
-    private static final Shape characterShape = new BoxShape(1, 2);
+    private static final Shape characterShape = new PolygonShape(
+            -1.56f,-1.82f, -0.22f,-2.04f, 0.83f,-1.35f, 1.63f,-0.55f, 0.59f,0.66f, -0.34f,1.58f, -1.94f,1.3f, -2.29f,-0.15f
 
+
+    );
     private static final float walkingSpeed = 10;
-    BodyImage RightImage = new BodyImage("images/RPirate.png", 4);
+    BodyImage RightImage = new BodyImage("images/RPirate.png", 5);
 
-    BodyImage LeftImage = new BodyImage("images/LPirate.png", 4);
+    BodyImage LeftImage = new BodyImage("images/LPirate.png", 5);
 
 
     // private int credits;
@@ -57,7 +60,7 @@ public class Player extends Walker {
             projectile.setPosition(new Vec2(this.getPosition().x + 2, this.getPosition().y));
             projectile.setLinearVelocity(new Vec2(projectileSpeed, 0));
         } else {
-            projectile.setPosition(new Vec2(this.getPosition().x - 2, this.getPosition().y));
+            projectile.setPosition(new Vec2(this.getPosition().x - 3, this.getPosition().y));
             projectile.setLinearVelocity(new Vec2(-projectileSpeed, 0));
         }
     }
