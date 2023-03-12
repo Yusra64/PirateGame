@@ -2,11 +2,11 @@ package window;
 
 import javax.swing.*;
 
-public class Window {
+public class Game {
     private static Enemy enemy;
     private GameWorld world;
 
-    public Window(){
+    public Game(){
        super();
         GameWorld world = new GameWorld();
         //UserView view = new UserView(world, 500, 500);
@@ -30,11 +30,10 @@ public class Window {
         frame.pack();
         frame.setVisible(true);
         world.start();
-
     }
 
     public static void main(String[] args){
-        Window window = new Window();
+        Game game = new Game();
     }
 
 
