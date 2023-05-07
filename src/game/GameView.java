@@ -1,4 +1,4 @@
-package window;
+package game;
 
 import city.cs.engine.UserView;
 
@@ -6,15 +6,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameView extends UserView {
-    private Image background, heart;
+    private Image background, heart,background2;
     private Player player; // so to access lives from Player class
-    private GameWorld world;
-
+    private GameLevel game;
 
     @Override
     protected void paintBackground(Graphics2D g) {
         g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
-        background = new ImageIcon("images/background.jpeg").getImage();
+        background = new ImageIcon("images/background2.jpg").getImage();
     }
 
     @Override
@@ -48,24 +47,32 @@ public class GameView extends UserView {
         super.paint(g3);
         heart = new ImageIcon("images/heart.png").getImage();
         if(player.getLives() > 0){
-            g3.drawImage(heart, 10, 10, 40, 40, this); // draws heart as long as lives is not 0
+            g3.drawImage(heart, 10, 10, 40, 40, this);
         }
-        else if (player.getLives() == 0) {
-            repaint(); // calls method to restart and since count is not equal to 3 anymore heart is not drawn
+        else if (player.getLives() == 0){
+            repaint();
             player.destroy();
             g3.setColor(new Color(0,0,0,150)); //black colour
             g3.fillRect(0,0,getWidth(),getHeight());
-            Font myFont = new Font ("Helvetica", 1, 60);
+            Font myFont = new Font ("TimesNewRoman", 1, 60);
             g3.setFont (myFont);
             g3.drawString("Game Over", 225, getHeight()/2);
         }
-    }
+        if(player.getGameCompleted() == 1) {
+            repaint();
+            player.destroy();
+            g3.setColor(new Color(0,50,0,150)); //black colour
+            g3.fillRect(0,0,getWidth(),getHeight());
+            Font myFont = new Font ("TimesNewRoman", 1, 60);
+            g3.setFont (myFont);
+            g3.drawString("Game Completed", 170, getHeight()/2);
+        }
+        }
 
-    public GameView(GameWorld world, int width, int height, Player player) {
-        super(world, width, height);
+    public GameView(GameLevel game, int width, int height, Player player) {
+        super(game, width, height);
         this.player = player;
     }
-
     public Player getPlayer() {
         return player;
     }
@@ -75,14 +82,9 @@ public class GameView extends UserView {
     }
 
     @Override
-    public GameWorld getWorld() {
-        return world;
+    public GameLevel getWorld() {
+        return game;
     }
-
-    public void setWorld(GameWorld world) {
-        this.world = world;
-    }
-
 }
 
 
